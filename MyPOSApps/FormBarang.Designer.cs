@@ -29,35 +29,36 @@ namespace MyPOSApps
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dgvBarang = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBarang)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvBarang
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(566, 188);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvBarang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBarang.Location = new System.Drawing.Point(12, 38);
+            this.dgvBarang.Name = "dgvBarang";
+            this.dgvBarang.RowHeadersWidth = 51;
+            this.dgvBarang.RowTemplate.Height = 29;
+            this.dgvBarang.Size = new System.Drawing.Size(830, 188);
+            this.dgvBarang.TabIndex = 0;
             // 
             // FormBarang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(854, 450);
+            this.Controls.Add(this.dgvBarang);
             this.Name = "FormBarang";
             this.Text = "FormBarang";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.FormBarang_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBarang)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvBarang;
     }
 }
