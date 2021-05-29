@@ -56,5 +56,41 @@ namespace MyPOSApps.DAL
                 }
             }
         }
+
+        public int Insert(Barang barang)
+        {
+            int hasil = 0;
+            using(MySqlConnection conn = new MySqlConnection(GetConnectionString()))
+            {
+                string strSql = @"insert into barang(KodeBarang,NamaBarang,HargaBeli,HargaJual,Stok,TanggalBeli) 
+                values(@KodeBarang,@NamaBarang,@HargaBeli,@HargaJual,@Stok,@TanggalBeli)";
+                MySqlCommand cmd = new MySqlCommand(strSql, conn);
+                cmd.Parameters.AddWithValue("@KodeBarang", barang.KodeBarang);
+                cmd.Parameters.AddWithValue("@NamaBarang", barang.NamaBarang);
+                cmd.Parameters.AddWithValue("@HargaBeli", barang.HargaBeli);
+                cmd.Parameters.AddWithValue("@HargaJual", barang.HargaJual);
+                cmd.Parameters.AddWithValue("@Stok", barang.Stok);
+                cmd.Parameters.AddWithValue("@TanggalBeli", barang.TanggalBeli);
+
+                try
+                {
+                    conn.Open();
+                    hasil = cmd.ExecuteNonQuery();
+                    if (hasil != 1)
+                        throw new Exception("Gagal menambahkan data");
+
+                    return hasil;
+                }
+                catch (MySqlException sqlEx)
+                {
+                    throw new Exception($"Kesalahan: {sqlEx.InnerException.Message}");
+                }
+                finally
+                {
+                    cmd.Dispose();
+                    conn.Close();
+                }
+            }
+        }
     }
 }

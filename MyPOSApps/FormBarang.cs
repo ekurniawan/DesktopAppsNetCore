@@ -1,4 +1,5 @@
 ﻿using MyPOSApps.DAL;
+using MyPOSApps.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,12 +33,41 @@ namespace MyPOSApps
                 MessageBox.Show($"{ex.Message}", "Kesalahan", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
 
         private void FormBarang_Load(object sender, EventArgs e)
         {
             FillBarang();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Barang newBarang = new Barang
+                {
+                    KodeBarang = txtKodeBarang.Text,
+                    NamaBarang = txtNamaBarang.Text,
+                    HargaBeli = Convert.ToDecimal(txtHargaBeli.Text),
+                    HargaJual = Convert.ToDecimal(txtHargaJual.Text),
+                    Stok = Convert.ToInt32(txtStok.Text),
+                    TanggalBeli = dtpTanggalBeli.Value                
+                };
+                int result = barangDAL.Insert(newBarang);
+                if (result == 1)
+                {
+                    MessageBox.Show("Data Barang berhasil ditambahkan", "Info");
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menambahkan data..","Kesalahan",MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Kesalahan");
+            }
         }
     }
 }
