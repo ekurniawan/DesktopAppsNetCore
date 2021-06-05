@@ -126,5 +126,33 @@ namespace MyPOSApps.DAL
                 }
             }
         }
+
+        public int Delete(string KodeBarang)
+        {
+            int hasil = 0;
+            using(MySqlConnection conn = new MySqlConnection(GetConnectionString()))
+            {
+                string strSql = @"delete from barang where KodeBarang=@KodeBarang";
+                MySqlCommand cmd = new MySqlCommand(strSql, conn);
+                cmd.Parameters.AddWithValue("@KodeBarang", KodeBarang);
+                try
+                {
+                    conn.Open();
+                    hasil = cmd.ExecuteNonQuery();
+                    if (hasil != 1)
+                        throw new Exception("Data gagal didelete");
+                    return hasil;
+                }
+                catch (MySqlException sqlEx)
+                {
+                    throw new Exception($"Kesalahan: {sqlEx.Message}");
+                }
+                finally
+                {
+                    cmd.Dispose();
+                    conn.Close();
+                }
+            }
+        }
     }
 }

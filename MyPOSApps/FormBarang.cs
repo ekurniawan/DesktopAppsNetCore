@@ -98,5 +98,27 @@ namespace MyPOSApps
                 MessageBox.Show($"{ex.Message}", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int result = barangDAL.Delete(txtKodeBarang.Text);
+                if(result==1)
+                {
+                    MessageBox.Show("Data barang berhasil di delete", "Konfirmasi", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Data gagal di delete");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Kesalahan: {ex.Message}", "Kesalahan", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
     }
 }
