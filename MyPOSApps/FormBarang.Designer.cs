@@ -43,8 +43,9 @@ namespace MyPOSApps
             this.txtStok = new System.Windows.Forms.TextBox();
             this.dtpTanggalBeli = new System.Windows.Forms.DateTimePicker();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarang)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,7 +158,7 @@ namespace MyPOSApps
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(12, 485);
+            this.btnSave.Location = new System.Drawing.Point(187, 485);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(67, 29);
             this.btnSave.TabIndex = 13;
@@ -165,33 +166,44 @@ namespace MyPOSApps
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(92, 485);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(94, 29);
-            this.btnUpdate.TabIndex = 14;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(201, 485);
+            this.btnDelete.Location = new System.Drawing.Point(260, 485);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(94, 29);
+            this.btnDelete.Size = new System.Drawing.Size(76, 29);
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(12, 485);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 29);
+            this.btnNew.TabIndex = 16;
+            this.btnNew.Text = "New";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(93, 485);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(88, 29);
+            this.btnEdit.TabIndex = 17;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // FormBarang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 526);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dtpTanggalBeli);
             this.Controls.Add(this.txtStok);
@@ -231,7 +243,8 @@ namespace MyPOSApps
         private System.Windows.Forms.TextBox txtStok;
         private System.Windows.Forms.DateTimePicker dtpTanggalBeli;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

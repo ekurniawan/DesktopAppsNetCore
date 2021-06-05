@@ -14,19 +14,99 @@ namespace MyPOSApps
 {
     public partial class FormBarang : Form
     {
+        private BindingSource bs;
         private BarangDAL barangDAL;
+        private bool isNew = false;
 
         public FormBarang()
         {
             InitializeComponent();
             barangDAL = new BarangDAL();
+            bs = new BindingSource();
         }
+
+        private void TambahBinding()
+        {
+            txtKodeBarang.DataBindings.Add("Text", bs, "KodeBarang");
+            txtNamaBarang.DataBindings.Add("Text", bs, "NamaBarang");
+            txtHargaBeli.DataBindings.Add("Text", bs, "HargaBeli");
+            txtHargaJual.DataBindings.Add("Text", bs, "HargaJual");
+            txtStok.DataBindings.Add("Text", bs, "Stok");
+            dtpTanggalBeli.DataBindings.Add("Value", bs, "TanggalBeli");
+        }
+
+        private void HapusBinding()
+        {
+            txtKodeBarang.DataBindings.Clear();
+            txtNamaBarang.DataBindings.Clear();
+            txtHargaBeli.DataBindings.Clear();
+            txtHargaJual.DataBindings.Clear();
+            txtStok.DataBindings.Clear();
+            dtpTanggalBeli.DataBindings.Clear();
+        }
+
+        private void InisialisasiAwal()
+        {
+            txtKodeBarang.Enabled = false;
+            txtNamaBarang.Enabled = false;
+            txtHargaBeli.Enabled = false;
+            txtHargaJual.Enabled = false;
+            txtHargaBeli.Enabled = false;
+            txtStok.Enabled = false;
+            dtpTanggalBeli.Enabled = false;
+
+            FillBarang();
+            TambahBinding();
+            isNew = false;
+        }
+
+        private void InisialisasiNew()
+        {
+            //reset binding
+            HapusBinding();
+
+            foreach(var ctr in this.Controls)
+            {
+                if(ctr is TextBox)
+                {
+                    var myTextBox = ctr as TextBox;
+                    myTextBox.Enabled = true;
+                    myTextBox.Text = string.Empty;
+                }
+            }
+            dtpTanggalBeli.Enabled = true;
+            txtKodeBarang.Focus();
+
+            isNew = true;
+        }
+
+
+        private void InisialisasiEdit()
+        {
+            HapusBinding();
+
+            foreach (var ctr in this.Controls)
+            {
+                if (ctr is TextBox)
+                {
+                    var myTextBox = ctr as TextBox;
+                    myTextBox.Enabled = true;
+                }
+            }
+            dtpTanggalBeli.Enabled = true;
+            txtKodeBarang.Enabled = false;
+            txtNamaBarang.Focus();
+            isNew = false;
+        }
+
+
 
         private void FillBarang()
         {
             try
             {
-                dgvBarang.DataSource = barangDAL.GetAll();
+                bs.DataSource = barangDAL.GetAll();
+                dgvBarang.DataSource = bs;
             }
             catch (Exception ex)
             {
@@ -35,12 +115,9 @@ namespace MyPOSApps
             }
         }
 
-        private void FormBarang_Load(object sender, EventArgs e)
-        {
-            FillBarang();
-        }
+        #region CRUD
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void InsertBarang()
         {
             try
             {
@@ -51,16 +128,17 @@ namespace MyPOSApps
                     HargaBeli = Convert.ToDecimal(txtHargaBeli.Text),
                     HargaJual = Convert.ToDecimal(txtHargaJual.Text),
                     Stok = Convert.ToInt32(txtStok.Text),
-                    TanggalBeli = dtpTanggalBeli.Value                
+                    TanggalBeli = dtpTanggalBeli.Value
                 };
                 int result = barangDAL.Insert(newBarang);
                 if (result == 1)
                 {
                     MessageBox.Show("Data Barang berhasil ditambahkan", "Info");
+                    InisialisasiAwal();
                 }
                 else
                 {
-                    MessageBox.Show("Gagal menambahkan data..","Kesalahan",MessageBoxButtons.OK,
+                    MessageBox.Show("Gagal menambahkan data..", "Kesalahan", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
             }
@@ -70,7 +148,7 @@ namespace MyPOSApps
             }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void UpdateBarang()
         {
             try
             {
@@ -87,6 +165,7 @@ namespace MyPOSApps
                 if (result == 1)
                 {
                     MessageBox.Show("Data Berhasil Diupdate");
+                    InisialisasiAwal();
                 }
                 else
                 {
@@ -96,6 +175,25 @@ namespace MyPOSApps
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        private void FormBarang_Load(object sender, EventArgs e)
+        {
+            InisialisasiAwal();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (isNew)
+            {
+                InsertBarang();
+            }
+            else
+            {
+                UpdateBarang();
             }
         }
 
@@ -119,6 +217,16 @@ namespace MyPOSApps
                 MessageBox.Show($"Kesalahan: {ex.Message}", "Kesalahan", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            InisialisasiNew();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            InisialisasiEdit();
         }
     }
 }
