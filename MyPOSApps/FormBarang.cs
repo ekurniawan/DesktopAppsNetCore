@@ -69,5 +69,34 @@ namespace MyPOSApps
                 MessageBox.Show(ex.Message, "Kesalahan");
             }
         }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var editBarang = new Barang
+                {
+                    NamaBarang = txtNamaBarang.Text,
+                    HargaBeli = Convert.ToDecimal(txtHargaBeli.Text),
+                    HargaJual = Convert.ToDecimal(txtHargaJual.Text),
+                    Stok = Convert.ToInt32(txtStok.Text),
+                    TanggalBeli = Convert.ToDateTime(dtpTanggalBeli.Value),
+                    KodeBarang = txtKodeBarang.Text
+                };
+                int result = barangDAL.Update(editBarang);
+                if (result == 1)
+                {
+                    MessageBox.Show("Data Berhasil Diupdate");
+                }
+                else
+                {
+                    MessageBox.Show("Data gagal diupdate");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -92,5 +92,39 @@ namespace MyPOSApps.DAL
                 }
             }
         }
+
+        public int Update(Barang barang)
+        {
+            int hasil = 0;
+            using(MySqlConnection conn = new MySqlConnection(GetConnectionString()))
+            {
+                string strSql = @"update barang set NamaBarang=@NamaBarang,HargaBeli=@HargaBeli,HargaJual=@HargaJual,
+                                Stok=@Stok,TanggalBeli=@TanggalBeli where KodeBarang=@KodeBarang";
+                MySqlCommand cmd = new MySqlCommand(strSql, conn);
+                cmd.Parameters.AddWithValue("@NamaBarang", barang.NamaBarang);
+                cmd.Parameters.AddWithValue("@HargaBeli", barang.HargaBeli);
+                cmd.Parameters.AddWithValue("@HargaJual", barang.HargaJual);
+                cmd.Parameters.AddWithValue("@Stok", barang.Stok);
+                cmd.Parameters.AddWithValue("@TanggalBeli", barang.TanggalBeli);
+                cmd.Parameters.AddWithValue("@KodeBarang", barang.KodeBarang);
+                try
+                {
+                    conn.Open();
+                    hasil = cmd.ExecuteNonQuery();
+                    if (hasil != 1)
+                        throw new Exception("Gagal untuk mengupdate data");
+                    return hasil;
+                }
+                catch (MySqlException sqlEx)
+                {
+                    throw new Exception($"Kesalahan: {sqlEx.Message}");
+                }
+                finally
+                {
+                    cmd.Dispose();
+                    conn.Close();
+                }
+            }
+        }
     }
 }

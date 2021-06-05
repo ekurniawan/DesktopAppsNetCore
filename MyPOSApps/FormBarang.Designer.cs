@@ -43,6 +43,7 @@ namespace MyPOSApps
             this.txtStok = new System.Windows.Forms.TextBox();
             this.dtpTanggalBeli = new System.Windows.Forms.DateTimePicker();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarang)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,11 +164,22 @@ namespace MyPOSApps
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(92, 485);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(94, 29);
+            this.btnUpdate.TabIndex = 14;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // FormBarang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 526);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dtpTanggalBeli);
             this.Controls.Add(this.txtStok);
@@ -207,5 +219,6 @@ namespace MyPOSApps
         private System.Windows.Forms.TextBox txtStok;
         private System.Windows.Forms.DateTimePicker dtpTanggalBeli;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
