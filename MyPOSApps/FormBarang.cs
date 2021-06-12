@@ -25,6 +25,8 @@ namespace MyPOSApps
             bs = new BindingSource();
         }
 
+        #region Inisialisasi dan Binding
+
         private void TambahBinding()
         {
             txtKodeBarang.DataBindings.Add("Text", bs, "KodeBarang");
@@ -70,9 +72,9 @@ namespace MyPOSApps
             //reset binding
             HapusBinding();
 
-            foreach(var ctr in this.Controls)
+            foreach (var ctr in this.Controls)
             {
-                if(ctr is TextBox)
+                if (ctr is TextBox)
                 {
                     var myTextBox = ctr as TextBox;
                     myTextBox.Enabled = true;
@@ -115,7 +117,9 @@ namespace MyPOSApps
             isNew = false;
         }
 
+        #endregion
 
+        #region CRUD
 
         private void FillBarang()
         {
@@ -126,12 +130,10 @@ namespace MyPOSApps
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}", "Kesalahan", 
+                MessageBox.Show($"{ex.Message}", "Kesalahan",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        #region CRUD
 
         private void InsertBarang()
         {
@@ -196,6 +198,29 @@ namespace MyPOSApps
 
         #endregion
 
+        #region Pencarian Data
+
+        private void SearchData(string namaBarang)
+        {
+            try
+            {
+                HapusBinding();
+                bs.Clear();
+                //var results = barangDAL.GetByNama(namaBarang);
+                
+                bs.DataSource = barangDAL.GetByNama(namaBarang);
+                dgvBarang.DataSource = bs;
+                TambahBinding();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Kesalahan",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
         private void FormBarang_Load(object sender, EventArgs e)
         {
             InisialisasiAwal();
@@ -251,6 +276,14 @@ namespace MyPOSApps
         private void btnEdit_Click(object sender, EventArgs e)
         {
             InisialisasiEdit();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text.Length >= 2)
+            {
+                SearchData(txtSearch.Text);
+            }
         }
     }
 }

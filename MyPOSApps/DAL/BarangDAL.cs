@@ -64,9 +64,10 @@ namespace MyPOSApps.DAL
             {
                 string strSql = @"select * from barang where NamaBarang like @NamaBarang";
                 MySqlCommand cmd = new MySqlCommand(strSql, conn);
-                cmd.Parameters.AddWithValue("@NamaBarang", $"'%{namaBarang}%'");
+                cmd.Parameters.AddWithValue("@NamaBarang", "%" + namaBarang+"%");
                 try
                 {
+                    conn.Open();
                     MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
@@ -78,6 +79,7 @@ namespace MyPOSApps.DAL
                                 NamaBarang = dr["NamaBarang"].ToString(),
                                 HargaBeli = Convert.ToDecimal(dr["HargaBeli"]),
                                 HargaJual = Convert.ToDecimal(dr["HargaJual"]),
+                                Stok = Convert.ToInt32(dr["Stok"]),
                                 TanggalBeli = Convert.ToDateTime(dr["TanggalBeli"])
                             });
                         }
