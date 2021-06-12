@@ -57,6 +57,46 @@ namespace MyPOSApps.DAL
             }
         }
 
+        public List<Barang> GetByNama(string namaBarang)
+        {
+            List<Barang> lstBarang = new List<Barang>();
+            using (MySqlConnection conn = new MySqlConnection(GetConnectionString()))
+            {
+                string strSql = @"select * from barang where NamaBarang like @NamaBarang";
+                MySqlCommand cmd = new MySqlCommand(strSql, conn);
+                cmd.Parameters.AddWithValue("@NamaBarang", $"'%{namaBarang}%'");
+                try
+                {
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            lstBarang.Add(new Barang
+                            {
+                                KodeBarang = dr["KodeBarang"].ToString(),
+                                NamaBarang = dr["NamaBarang"].ToString(),
+                                HargaBeli = Convert.ToDecimal(dr["HargaBeli"]),
+                                HargaJual = Convert.ToDecimal(dr["HargaJual"]),
+                                TanggalBeli = Convert.ToDateTime(dr["TanggalBeli"])
+                            });
+                        }
+                    }
+                    dr.Close();
+                    return lstBarang;
+                }
+                catch (MySqlException sqlEx)
+                {
+                    throw new Exception(sqlEx.Message);
+                }
+                finally
+                {
+                    cmd.Dispose();
+                    conn.Close();
+                }
+            }
+        }
+
         public int Insert(Barang barang)
         {
             int hasil = 0;

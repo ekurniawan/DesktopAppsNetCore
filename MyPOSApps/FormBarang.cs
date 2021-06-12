@@ -215,23 +215,31 @@ namespace MyPOSApps
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            var output = MessageBox.Show("Apakah anda yakin akan mendelete data ?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (output == DialogResult.Yes)
             {
-                int result = barangDAL.Delete(txtKodeBarang.Text);
-                if(result==1)
+                try
                 {
-                    MessageBox.Show("Data barang berhasil di delete", "Konfirmasi", MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    HapusBinding();
+                    int result = barangDAL.Delete(txtKodeBarang.Text);
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Data barang berhasil di delete", "Konfirmasi", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                        InisialisasiAwal();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data gagal di delete");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Data gagal di delete");
+                    MessageBox.Show($"Kesalahan: {ex.Message}", "Kesalahan", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Kesalahan: {ex.Message}", "Kesalahan", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
             }
         }
 

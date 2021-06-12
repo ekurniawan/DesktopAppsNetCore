@@ -46,13 +46,16 @@ namespace MyPOSApps
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnCari = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarang)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvBarang
             // 
             this.dgvBarang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBarang.Location = new System.Drawing.Point(12, 248);
+            this.dgvBarang.Location = new System.Drawing.Point(12, 312);
             this.dgvBarang.Name = "dgvBarang";
             this.dgvBarang.RowHeadersWidth = 51;
             this.dgvBarang.RowTemplate.Height = 29;
@@ -158,7 +161,7 @@ namespace MyPOSApps
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(187, 485);
+            this.btnSave.Location = new System.Drawing.Point(187, 549);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(67, 29);
             this.btnSave.TabIndex = 13;
@@ -168,7 +171,7 @@ namespace MyPOSApps
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(260, 485);
+            this.btnDelete.Location = new System.Drawing.Point(260, 549);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(76, 29);
             this.btnDelete.TabIndex = 15;
@@ -178,7 +181,7 @@ namespace MyPOSApps
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(12, 485);
+            this.btnNew.Location = new System.Drawing.Point(12, 549);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 29);
             this.btnNew.TabIndex = 16;
@@ -188,7 +191,7 @@ namespace MyPOSApps
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(93, 485);
+            this.btnEdit.Location = new System.Drawing.Point(93, 549);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(88, 29);
             this.btnEdit.TabIndex = 17;
@@ -196,11 +199,39 @@ namespace MyPOSApps
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 273);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(136, 20);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Masukan Keyword :";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(154, 270);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(379, 27);
+            this.txtSearch.TabIndex = 19;
+            // 
+            // btnCari
+            // 
+            this.btnCari.Location = new System.Drawing.Point(539, 270);
+            this.btnCari.Name = "btnCari";
+            this.btnCari.Size = new System.Drawing.Size(94, 29);
+            this.btnCari.TabIndex = 20;
+            this.btnCari.Text = "Cari Data";
+            this.btnCari.UseVisualStyleBackColor = true;
+            // 
             // FormBarang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 526);
+            this.ClientSize = new System.Drawing.Size(854, 590);
+            this.Controls.Add(this.btnCari);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnDelete);
@@ -246,5 +277,8 @@ namespace MyPOSApps
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnCari;
     }
 }
