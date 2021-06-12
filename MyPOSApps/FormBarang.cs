@@ -55,6 +55,11 @@ namespace MyPOSApps
             txtStok.Enabled = false;
             dtpTanggalBeli.Enabled = false;
 
+            btnNew.Enabled = true;
+            btnEdit.Enabled = true;
+            btnSave.Enabled = false;
+            btnDelete.Enabled = true;
+
             FillBarang();
             TambahBinding();
             isNew = false;
@@ -77,6 +82,11 @@ namespace MyPOSApps
             dtpTanggalBeli.Enabled = true;
             txtKodeBarang.Focus();
 
+            btnNew.Enabled = false;
+            btnEdit.Enabled = false;
+            btnSave.Enabled = true;
+            btnDelete.Enabled = false;
+
             isNew = true;
         }
 
@@ -93,6 +103,12 @@ namespace MyPOSApps
                     myTextBox.Enabled = true;
                 }
             }
+
+            btnNew.Enabled = false;
+            btnEdit.Enabled = false;
+            btnSave.Enabled = true;
+            btnDelete.Enabled = false;
+
             dtpTanggalBeli.Enabled = true;
             txtKodeBarang.Enabled = false;
             txtNamaBarang.Focus();
