@@ -285,5 +285,11 @@ namespace MyPOSApps
                 SearchData(txtSearch.Text);
             }
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            FormReportDataBarang frmReportDataBarang = new FormReportDataBarang();
+            frmReportDataBarang.Show();
+        }
     }
 }

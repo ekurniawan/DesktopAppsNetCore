@@ -7,7 +7,55 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ReportBarang.rdlc" />
+    <None Remove="ReportDataBarang.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.25" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ReportBarang.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ReportDataBarang.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BarangDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BarangDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="dsDataBarang.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsDataBarang.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="posdbDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>posdbDataSet.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="BarangDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BarangDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="dsDataBarang.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDataBarang.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="posdbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>posdbDataSet.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
