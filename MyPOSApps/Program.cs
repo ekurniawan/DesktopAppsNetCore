@@ -17,7 +17,7 @@ namespace MyPOSApps
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormBarang());
+            Application.Run(FormPembelian.Instance());
         }
     }
 }
