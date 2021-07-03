@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPOSApps.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -85,10 +86,11 @@ namespace MyPOSApps
 
         #endregion
 
-
+        private PembelianDAL pembelianDAL;
         public FormPembelian()
         {
             InitializeComponent();
+            pembelianDAL = new PembelianDAL();
         }
 
         private void txtKodeSupplier_KeyDown(object sender, KeyEventArgs e)
@@ -103,6 +105,11 @@ namespace MyPOSApps
         {
             var frmSupplier = new FormSupplier();
             FormSupplier.Instance().Show();
+        }
+
+        private void FormPembelian_Load(object sender, EventArgs e)
+        {
+            txtNoNotaBeli.Text = pembelianDAL.GenerateNota(DateTime.Now, 1);
         }
     }
 }
