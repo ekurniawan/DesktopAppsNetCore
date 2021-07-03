@@ -247,6 +247,7 @@ namespace MyPOSApps
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.Size = new System.Drawing.Size(125, 27);
             this.txtSubtotal.TabIndex = 11;
+            this.txtSubtotal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSubtotal_KeyDown);
             // 
             // label10
             // 

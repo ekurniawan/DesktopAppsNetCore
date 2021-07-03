@@ -1,4 +1,5 @@
 ﻿using MyPOSApps.DAL;
+using MyPOSApps.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -125,11 +126,13 @@ namespace MyPOSApps
 
         #endregion
 
+        private ItemBeliDAL itemBeliDAL;
         private PembelianDAL pembelianDAL;
         public FormPembelian()
         {
             InitializeComponent();
             pembelianDAL = new PembelianDAL();
+            itemBeliDAL = new ItemBeliDAL();
         }
 
         private void txtKodeSupplier_KeyDown(object sender, KeyEventArgs e)
@@ -161,6 +164,31 @@ namespace MyPOSApps
             {
                 txtSubtotal.Text = (Convert.ToDecimal(txtQty.Text) * Convert.ToDecimal(txtHargaBeli.Text)).ToString();
                 txtSubtotal.Focus();
+            }
+        }
+
+        private void txtSubtotal_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var newItemBeli = new ItemBeli
+                {
+                    No = txtNoNotaBeli.Text,
+                    KodeBarang = txtKodeBarang.Text,
+                    HargaBeli = Convert.ToDecimal(txtHargaBeli.Text),
+                    Jumlah = Convert.ToInt32(txtQty.Text)
+                };
+
+                try
+                {
+                    itemBeliDAL.TambahItemBeli(newItemBeli);
+                    MessageBox.Show("Data berhasil ditambah", "Keterangan");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{ex.Message}", "Error");
+                }
+                
             }
         }
     }
