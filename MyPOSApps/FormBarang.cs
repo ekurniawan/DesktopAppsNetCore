@@ -14,6 +14,16 @@ namespace MyPOSApps
 {
     public partial class FormBarang : Form
     {
+        private static FormBarang _instance;
+        public static FormBarang Instance()
+        {
+            if (_instance == null)
+                _instance = new FormBarang();
+            return _instance;
+        }
+
+
+
         private BindingSource bs;
         private BarangDAL barangDAL;
         private bool isNew = false;
@@ -290,6 +300,16 @@ namespace MyPOSApps
         {
             FormReportDataBarang frmReportDataBarang = new FormReportDataBarang();
             frmReportDataBarang.Show();
+        }
+
+        private void dgvBarang_DoubleClick(object sender, EventArgs e)
+        {
+            Barang currBarang = (Barang)bs.Current;
+            FormPembelian.Instance().TxtKodeBarang.Text = currBarang.KodeBarang;
+            FormPembelian.Instance().TxtNamaBarang.Text = currBarang.NamaBarang;
+            FormPembelian.Instance().TxtHargaBeli.Text = currBarang.HargaBeli.ToString();
+
+            this.Hide();
         }
     }
 }

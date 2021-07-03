@@ -27,13 +27,16 @@ namespace MyPOSApps
 
         #region public property yg nanti akan diakses
 
-        public TextBox TxtKodeSupplier {
-            get {
+        public TextBox TxtKodeSupplier
+        {
+            get
+            {
                 return txtKodeSupplier;
             }
-            set {
+            set
+            {
                 txtKodeSupplier = value;
-            } 
+            }
         }
 
         public TextBox TxtNamaSupplier
@@ -84,6 +87,42 @@ namespace MyPOSApps
             }
         }
 
+        public TextBox TxtKodeBarang
+        {
+            get
+            {
+                return txtKodeBarang;
+            }
+            set
+            {
+                txtKodeBarang = value;
+            }
+        }
+
+        public TextBox TxtNamaBarang
+        {
+            get
+            {
+                return txtNamaBarang;
+            }
+            set
+            {
+                txtNamaBarang = value;
+            }
+        }
+
+        public TextBox TxtHargaBeli
+        {
+            get
+            {
+                return txtHargaBeli;
+            }
+            set
+            {
+                txtHargaBeli = value;
+            }
+        }
+
         #endregion
 
         private PembelianDAL pembelianDAL;
@@ -95,21 +134,34 @@ namespace MyPOSApps
 
         private void txtKodeSupplier_KeyDown(object sender, KeyEventArgs e)
         {
-            /*if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
-                
-            }*/
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var frmSupplier = new FormSupplier();
-            FormSupplier.Instance().Show();
+                FormSupplier.Instance().Show();
+            }
         }
 
         private void FormPembelian_Load(object sender, EventArgs e)
         {
             txtNoNotaBeli.Text = pembelianDAL.GenerateNota(DateTime.Now, 1);
+        }
+
+
+
+        private void txtKodeBarang_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                FormBarang.Instance().Show();
+            }
+        }
+
+        private void txtQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSubtotal.Text = (Convert.ToDecimal(txtQty.Text) * Convert.ToDecimal(txtHargaBeli.Text)).ToString();
+                txtSubtotal.Focus();
+            }
         }
     }
 }

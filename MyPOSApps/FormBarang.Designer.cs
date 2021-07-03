@@ -61,6 +61,7 @@ namespace MyPOSApps
             this.dgvBarang.RowTemplate.Height = 29;
             this.dgvBarang.Size = new System.Drawing.Size(830, 227);
             this.dgvBarang.TabIndex = 0;
+            this.dgvBarang.DoubleClick += new System.EventHandler(this.dgvBarang_DoubleClick);
             // 
             // label1
             // 
