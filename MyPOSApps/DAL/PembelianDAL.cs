@@ -17,6 +17,7 @@ namespace MyPOSApps.DAL
         }
 
 
+        //
         public string GenerateNota(DateTime tanggaBeli,int kodeSupplier)
         {
             //cek nomor nota beli terakhir
