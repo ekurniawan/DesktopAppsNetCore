@@ -29,10 +29,12 @@ namespace MyPOSApps
 
         private BindingSource bs;
         private SupplierDAL supplierDAL;
+        private PembelianDAL pembelianDAL;
         public FormSupplier()
         {
             InitializeComponent();
             supplierDAL = new SupplierDAL();
+            pembelianDAL = new PembelianDAL();
             bs = new BindingSource();
         }
 

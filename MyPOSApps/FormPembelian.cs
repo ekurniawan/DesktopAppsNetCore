@@ -124,15 +124,59 @@ namespace MyPOSApps
             }
         }
 
+        public TextBox TxtNoNotaBeli
+        {
+            get
+            {
+                return txtNoNotaBeli;
+            }
+            set
+            {
+                TxtNoNotaBeli = value;
+            }
+        }
+
         #endregion
 
         private ItemBeliDAL itemBeliDAL;
         private PembelianDAL pembelianDAL;
+        private BindingSource bs;
         public FormPembelian()
         {
             InitializeComponent();
             pembelianDAL = new PembelianDAL();
             itemBeliDAL = new ItemBeliDAL();
+            bs = new BindingSource();
+        }
+
+        private void TambahBinding()
+        {
+            txtKodeBarang.DataBindings.Add("Text", bs, "KodeBarang");
+            txtNamaBarang.DataBindings.Add("Text", bs, "NamaBarang");
+            txtHargaBeli.DataBindings.Add("Text", bs, "HargaBeli");
+            txtQty.DataBindings.Add("Text", bs, "JumlahBeli");
+        }
+
+        private void HapusBinding()
+        {
+            txtKodeBarang.DataBindings.Clear();
+            txtNamaBarang.DataBindings.Clear();
+            txtHargaBeli.DataBindings.Clear();
+            txtQty.DataBindings.Clear();
+        }
+
+        private void FillBarang()
+        {
+            try
+            {
+                bs.DataSource = itemBeliDAL.GetAll(txtNoNotaBeli.Text);
+                dgvNotaBeli.DataSource = bs;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Kesalahan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txtKodeSupplier_KeyDown(object sender, KeyEventArgs e)
@@ -146,9 +190,11 @@ namespace MyPOSApps
         private void FormPembelian_Load(object sender, EventArgs e)
         {
             txtNoNotaBeli.Text = pembelianDAL.GenerateNota(DateTime.Now, 1);
+
+            HapusBinding();
+            FillBarang();
+            TambahBinding();
         }
-
-
 
         private void txtKodeBarang_KeyDown(object sender, KeyEventArgs e)
         {
@@ -171,6 +217,7 @@ namespace MyPOSApps
         {
             if (e.KeyCode == Keys.Enter)
             {
+                HapusBinding();
                 var newItemBeli = new ItemBeli
                 {
                     No = txtNoNotaBeli.Text,
@@ -183,6 +230,8 @@ namespace MyPOSApps
                 {
                     itemBeliDAL.TambahItemBeli(newItemBeli);
                     MessageBox.Show("Data berhasil ditambah", "Keterangan");
+                    FillBarang();
+                    TambahBinding();
                 }
                 catch (Exception ex)
                 {
@@ -190,6 +239,12 @@ namespace MyPOSApps
                 }
                 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pembelianDAL.UpdateDataSupplier(txtKodeSupplier.Text, TxtNoNotaBeli.Text,dtTanggalBeli.Value);
+            MessageBox.Show("Update data supplier");
         }
     }
 }

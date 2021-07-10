@@ -17,6 +17,33 @@ namespace MyPOSApps.DAL
         }
 
 
+        public void UpdateDataSupplier(string kodeSupplier,string noNota,DateTime tanggalBeli)
+        {
+            using (MySqlConnection conn = new MySqlConnection(GetConnectionString()))
+            {
+                string strSql = @"update transaksibeli set KodeSupplier=@KodeSupplier,TanggalBeli=@TanggalBeli 
+                where No=@No";
+                MySqlCommand cmd = new MySqlCommand(strSql, conn);
+                cmd.Parameters.AddWithValue("@KodeSupplier", kodeSupplier);
+                cmd.Parameters.AddWithValue("@TanggalBeli", tanggalBeli);
+                cmd.Parameters.AddWithValue("@No", noNota);
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (MySqlException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    cmd.Dispose();
+                    conn.Close();
+                }
+            }
+        }
+
         //
         public string GenerateNota(DateTime tanggaBeli,int kodeSupplier)
         {
